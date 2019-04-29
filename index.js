@@ -16,6 +16,7 @@ const server = new ApolloServer({
     console.log(err)
     return err
   },
+  introspection:true,
   playground: true
 })
 
