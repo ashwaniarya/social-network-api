@@ -15,7 +15,8 @@ const server = new ApolloServer({
   formatError: err =>{ 
     console.log(err)
     return err
-  }
+  },
+  playground: true
 })
 
 server.listen().then(({ url }) => {
