@@ -5,6 +5,7 @@ const types = gql`
   type Category{
     _id:ID!,
     title:String!,
+    subTitle:String!,
     wallpaper:[Wallpaper],
     priority:Int,
     heightFactor:Float,
@@ -19,7 +20,7 @@ const queries = `
 
 //Mutations
 const mutations = `
-  addCategory(title:String!,priority:Int,heightFactor:Float):Category
+  addCategory(title:String!,subTitle:String!,priority:Int,heightFactor:Float):Category
   removeCategory(id:String!):Category
 
   `

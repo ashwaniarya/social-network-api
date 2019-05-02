@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 let categorySchema = new Schema({
   title: {type: String, required: true},
+  subTitle: {type: String, required: true},
   priority:{type:Number,default:1},
   heightFactor:{ type:Number,default:1.778}
 }, {

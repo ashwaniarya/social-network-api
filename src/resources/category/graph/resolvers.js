@@ -28,6 +28,7 @@ const resolvers = {
       let newCategory = new Category()
 
       newCategory.title = args.title
+      newCategory.subTitle = args.subTitle
       if(args.priority){
         newCategory.priority = args.priority
       }
