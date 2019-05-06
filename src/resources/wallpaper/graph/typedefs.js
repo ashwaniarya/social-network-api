@@ -19,6 +19,7 @@ const types = gql`
 //Queries
 const queries = `
   wallpapers:[Wallpaper],
+  trendingWallpaper(category:ID!,skip:ID):[Wallpaper],
   wallpaper (_id:ID!):Wallpaper
 `
 

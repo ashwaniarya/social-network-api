@@ -5,8 +5,8 @@ const Category = require('../../category/model')
 const resolvers = {
   Query:{
     wallpapers: async (obj,args)=>{
-      let wallpepers = await Wallpaper.find({})
-      let json =  JSON.parse(JSON.stringify(wallpepers))
+      let wallpapers = await Wallpaper.find({})
+      let json =  JSON.parse(JSON.stringify(wallpapers))
       return json 
     },
     wallpaper: async (obj,args)=>{
@@ -14,6 +14,12 @@ const resolvers = {
       let json =  JSON.parse(JSON.stringify(wallpaper))
       return json 
     },
+    trendingWallpaper: async (obj,args)=>{
+      let wallpapers = await Wallpaper.find({category:args.category,_id:{$ne:args.skip}})
+      let json =  JSON.parse(JSON.stringify(wallpapers))
+      return json
+
+    }
   },
   Wallpaper:{ 
     category: async (obj,args)=>{
