@@ -5,11 +5,11 @@ const types = gql`
   type Category{
     _id:ID!,
     title:String!,
-    subTitle:String!,
+    subTitle:String,
     wallpaper:[Wallpaper],
     priority:Int,
-    heightFactor:Float,
-  }
+    parent:Category
+   }
 `
 
 //Queries
@@ -20,10 +20,12 @@ const queries = `
 
 //Mutations
 const mutations = `
-  addCategory(title:String!,subTitle:String!,priority:Int,heightFactor:Float):Category
-  removeCategory(id:String!):Category
+  """ Add a category """
+  addCategory(title:String!,subTitle:String!,priority:Int,parent:ID):Category
 
-  `
+  """ Remove Category """
+  removeCategory(id:String!):Category
+`
 
 module.exports = {
   types,

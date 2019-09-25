@@ -7,12 +7,13 @@ let wallpaperSchema = new Schema({
   likes: {type: Number, default: 0},
   url: {type: String, default: 0},
   download: {type: Number, default: 0},
-  category:{
+  category:[{
     type:Schema.Types.ObjectId,
     ref:'Category'
-  },
+  }],
   set: {type: Number, default: 0},
   share: {type: Number, default: 0}, 
+  premium:{ type: Boolean, default: false }
 }, {
   versionKey: false
 });
