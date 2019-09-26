@@ -6,6 +6,9 @@ const axios = require('axios')
 const dotenv = require('dotenv')
 dotenv.config()
 const {typeDefs,resolvers} = require('./src/resources')
+
+//test 
+console.log(process.env.MONGO_URL)
 // Connect ot mongodb
 mongoose.set('bufferCommands', false);
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true });
