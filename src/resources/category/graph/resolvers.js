@@ -63,6 +63,13 @@ const resolvers = {
       await Category.findByIdAndRemove(cat._id)
       let json =  JSON.parse(JSON.stringify(cat))
       return json 
+    },
+    modifyCategory: async (obj, args, context) => {
+      await validateToken(context)
+      console.log(args)
+      let updatedCat = await Category.findByIdAndUpdate(args._id,{$set:{...args}},{new:true})
+      let json =  JSON.parse(JSON.stringify(updatedCat))
+      return json  
     }
   }
 }

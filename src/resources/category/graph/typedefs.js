@@ -25,6 +25,9 @@ const mutations = `
 
   """ Remove Category """
   removeCategory(id:String!):Category
+
+  """ Modify Category """
+  modifyCategory(_id:ID!,title:String,subTitle:String,priority:Int,parent:ID):Category
 `
 
 module.exports = {
