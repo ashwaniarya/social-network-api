@@ -7,6 +7,8 @@ let wallpaperSchema = new Schema({
   likes: {type: Number, default: 0},
   url: {type: String, default: 0},
   download: {type: Number, default: 0},
+  timestamp:{ type: Date, default: Date.now() },
+  priority:{type: Number, default: 0},
   category:[{
     type:Schema.Types.ObjectId,
     ref:'Category'

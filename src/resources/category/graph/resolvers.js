@@ -25,7 +25,7 @@ const resolvers = {
   Category:{
     wallpaper: async (obj,args) => {
 
-      let wallpapers = await Wallpaper.find({category:obj._id})
+      let wallpapers = await Wallpaper.find({category:obj._id}).sort({priority:-1})
       let json =  JSON.parse(JSON.stringify(wallpapers))
       return json    
     },
