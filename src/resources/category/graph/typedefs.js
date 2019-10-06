@@ -8,13 +8,14 @@ const types = gql`
     subTitle:String,
     wallpaper:[Wallpaper],
     priority:Int,
-    parent:Category
+    parent:Category,
+    wallpaperLimit:Int
    }
 `
 
 //Queries
 const queries = `
-  categories (perCategory:Int):[Category],
+  categories (perCategory:Int,pageNumber:Int,limit:Int):[Category],
   category (_id:ID!):Category
 `
 

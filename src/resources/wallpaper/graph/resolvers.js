@@ -7,8 +7,34 @@ const resolvers = {
   Query:{
     wallpapers: async (obj,args, context)=>{
       await validateToken(context)
-
-      let wallpapers = await Wallpaper.find({})
+      let wallpapers = []
+      limit = 5
+      
+      //with category 
+      if(args.category){
+        if(args.pageNumber){
+          //fetch paginated wallpapers of a category
+          if(args.limit) limit = args.limit
+          wallpapers = await Wallpaper.find({category:args.category}).sort({priority:-1}).skip((args.pageNumber-1) * limit).limit(limit)
+        }
+        else{
+          //fetch all wallpapers of a category
+          wallpapers = await Wallpaper.find({category:args.category}).sort({priority:-1})   
+        }
+      }
+      //without category
+      else{
+        if(args.pageNumber){
+          //fetch pagenated wallpapers from all categories
+          if(args.limit) limit = args.limit
+          wallpapers = await Wallpaper.find({}).sort({priority:-1}).skip((args.pageNumber-1) * limit).limit(limit)
+        }
+        else{
+          //fetch all wallpapers from all categories
+          wallpapers = await Wallpaper.find({}).sort({priority:-1})   
+        }
+      }
+      
       let json =  JSON.parse(JSON.stringify(wallpapers))
       return json 
     },
