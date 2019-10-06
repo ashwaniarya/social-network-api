@@ -70,6 +70,7 @@ const resolvers = {
       newWallpaper.url = args.url
       newWallpaper.category = [...args.category]
       newWallpaper.premium = args.premium
+      newWallpaper.priority = args.priority
 
       let wallpaper = await newWallpaper.save()
       let json =  JSON.parse(JSON.stringify(wallpaper))
@@ -89,8 +90,8 @@ const resolvers = {
       let wallpaper = {}
       if(args.download)
         wallpaper = await Wallpaper.findByIdAndUpdate(args._id,{$inc:{download:args.download}},{new:true})
-      else if(args.premium){
-        wallpaper = await Wallpaper.findByIdAndUpdate(args._id,{$set:{premium:args.premium}},{new:true})
+      else{
+        wallpaper = await Wallpaper.findByIdAndUpdate(args._id,{$set:{...args}},{new:true})
       }
       return wallpaper
     }

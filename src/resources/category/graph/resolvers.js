@@ -48,6 +48,12 @@ const resolvers = {
       let json =  JSON.parse(JSON.stringify(wallpapers))
       return json    
     },
+    allWallpaper: async (obj,args) => {
+      //console.log(obj,args)
+      let wallpapers = await Wallpaper.find({category:obj._id}).sort({priority:-1})
+      let json =  JSON.parse(JSON.stringify(wallpapers))
+      return json    
+    },
     parent: async (obj, args) => {
       let category = await Category.findOne({_id:obj._id})
       let json =  JSON.parse(JSON.stringify(category))

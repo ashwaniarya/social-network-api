@@ -7,6 +7,7 @@ const types = gql`
     title:String!,
     subTitle:String,
     wallpaper:[Wallpaper],
+    allWallpaper:[Wallpaper],
     priority:Int,
     parent:Category,
     wallpaperLimit:Int

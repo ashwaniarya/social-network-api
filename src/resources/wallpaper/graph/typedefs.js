@@ -13,6 +13,7 @@ const types = gql`
     download:Int,
     set:Int,
     share:Int,
+    priority:Int,
     premium:Boolean
   }
 `
@@ -27,11 +28,11 @@ const queries = `
 //Mutations
 const mutations =  `
   """ Add a new wallpaper """
-  addWallpaper(title:String!,url:String!,category:[ID!],premium:Boolean):Wallpaper
+  addWallpaper(title:String!,url:String!,category:[ID!],premium:Boolean,priority:Int):Wallpaper
   removeWallpaper(_id:String!):Wallpaper
 
   """ Modify a wallpaper """ 
-  modifyWallpaper(_id:ID!,download:Int,premium:Boolean):Wallpaper
+  modifyWallpaper(_id:ID!,download:Int,premium:Boolean,priority:Int):Wallpaper
 `
 
 module.exports = {
