@@ -75,6 +75,7 @@ const resolvers = {
         newCategory.parent = args.parent
       }
 
+      
       let category = await newCategory.save({})
       let json =  JSON.parse(JSON.stringify(category))
       return json 
