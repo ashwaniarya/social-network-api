@@ -11,14 +11,7 @@ const resolvers = {
     }
   },
   Mutation:{
-    login: async (parent, args) => {
-
-      let decoded = jwt.verify(args.token,process.env.SECRET_KEY)
-      if(decoded.id !== process.env.APP_ID){
-        throw new Error("Invalid Token")
-      }
-      return true
-    }
+    
   }
 }
 

@@ -22,20 +22,22 @@ const server = new ApolloServer({
     console.log(err)
     return err
   },
-  context: ({ req }) => ({
-    headers: req ? req.headers : ''
-  }),
+  context: ({ req }) =>{ 
+    return ({
+      headers: req ? req.headers : ''
+    })
+  },
   introspection:true,
   playground: true
 })
 
 server.applyMiddleware({ app, path:'/graph'})
 
-app.use(express.static(__dirname+'/build'));
+// app.use(express.static(__dirname+'/build'));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve('build/index.html'));
+// });
 
 
 // server.listen().then(({ url }) => {

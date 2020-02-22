@@ -2,19 +2,24 @@ const { gql } = require('apollo-server')
 
 //types
 const types = gql`
-  type Auth{
-    token:String
+  type App {
+    _id:ID!,
+    name: String,
+    secret: String,
+    createdAt: String,
+    user: User
    }
 `
 
 //Queries
 const queries = `
-   getToken:Auth
+  
 `
 
 //Mutations
 const mutations = `
-
+  """ To add new App : PROTECTED """
+  addApp( name: String! ): App
 `
 
 module.exports = {
