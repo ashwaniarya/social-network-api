@@ -1,5 +1,5 @@
 
-const { generateToken, validateKey, validateToken } = require('./../../../util')
+const { generateToken, validateKey, validateToken } = require('./../../../authUtils')
 const jwt = require('jsonwebtoken')
 
 const resolvers = {

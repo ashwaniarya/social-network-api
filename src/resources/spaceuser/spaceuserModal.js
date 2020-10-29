@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { SPACE_USER_RELATION_ENUM } = require('./spaceuserConst')
 const Schema = mongoose.Schema;
 
 let spaceUserSchema = new Schema({
@@ -10,9 +11,16 @@ let spaceUserSchema = new Schema({
     ref: 'User',
     type: Schema.Types.ObjectId
   },
-  type: {
+  relation: {
     type: String,
-    enum: [ "admin", "moderator", "normal" ]
+    enum: SPACE_USER_RELATION_ENUM,
+    default: 'normal'
+  },
+  status: { type: String, default: 'pending', },
+  createdAt: { type: Date, default: new Date()},
+  permissions: {
+    type: Schema.Types.ObjectId,
+    ref: "Permission"
   }
 }, {
   versionKey: false

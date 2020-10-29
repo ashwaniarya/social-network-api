@@ -1,16 +1,18 @@
 const User = require( './../model' )
-const { generateToken } = require('./../../../util')
+const { generateToken, validateGatewayAccess } = require('./../../../authUtils')
 module.exports = resolvers = {
   Query: {
     
   },
   Mutation: {
-    // To sign up : PUBLIC
-    signUp: async ( parent, args ) => {
+    // To sign up app specific : PROTECTED
+    signUp: async ( parent, args, context ) => {
       try{
+
+        let app = await validateGatewayAccess(context);
         let isExist = null
         if( args.username || args.email ) {
-          isExist = await User.findOne( { ...args } )
+          isExist = await User.findOne( { username: args.username, email: args.email, app: app._id } )
         }
         if( isExist ){
           // Throw an error 
@@ -19,10 +21,11 @@ module.exports = resolvers = {
         else {
 
           // Create user in database
-
           let newUser = new User( { ...args } )
           newUser.type = 'normal'
-          newUser.email = newUser.toString().toLowerCase()
+          newUser.email = newUser.email.toString().toLowerCase()
+          newUser.app = app._id;
+          
           console.log(newUser)
           let savedUser = await newUser.save()
 
@@ -64,8 +67,7 @@ module.exports = resolvers = {
         if( user ){
           let token = generateToken( user )
           return {
-            token,
-            user
+            token
           }
         }
         else{

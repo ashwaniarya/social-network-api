@@ -4,8 +4,8 @@ const bcryptjs = require('bcryptjs');
 let Schema = mongoose.Schema
 
 let userSchema = new Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, require: true, unique: true },
+  username: { type: String, required: true },
+  email: { type: String, require: true },
   password: {
     type: String,
     minlength: 1
@@ -16,13 +16,15 @@ let userSchema = new Schema({
   },
   app: {
     type: Schema.Types.ObjectId,
-    ref: "App"
+    ref: "App",
+    default: null
   },
   points: { type: Number, default: 0 },
   createdAt: {
     type: Date, default: Date.now()
   },
   deleted: { type: Boolean, default: false },
+  deletedAt: { type: Date, default: null },
   auth:{
     agent:{
       type: String,
@@ -39,6 +41,7 @@ let userSchema = new Schema({
     }
   }
 })
+userSchema.index({username: 1, email: 1, app: 1}, {unique: true});
 
 userSchema.pre('save',function( next ){
   let user = this

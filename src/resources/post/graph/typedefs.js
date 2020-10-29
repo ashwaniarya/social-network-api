@@ -1,36 +1,37 @@
-const { gql } = require('apollo-server')
+const { gql } = require("apollo-server");
+const { POST_STATUS_ENUM, POST_TYPE_ENUM } = require("./../model/postConst");
 
+const enums = `
+  enum POST_STATUS_ENUM {
+    ${POST_STATUS_ENUM.join(",")}
+  }
+
+  enum POST_TYPE_ENUM {
+    ${POST_TYPE_ENUM.join(",")}
+  }
+`;
 //types
 const types = gql`
-  type Post{
-    _id:ID!,
-    title:String!,
-    views:Int,
-    space: Space,
-    user: User,
-    likes:Int,
-    type: POST_TYPE,
-    url:String!,
-    download:Int,
-    set:Int,
-    share:Int,
-    priority:Int,
-    premium:Boolean,
-    status: POST_STATUS
+  type Post {
+    _id: ID!
+    parent: ID
+    title: String!
+    views: Int
+    space: Space
+    user: User
+    likes: Int
+    type: POST_TYPE_ENUM
+    url: String
+    download: Int
+    set: Int
+    share: Int
+    priority: Int
+    premium: Boolean
+    status: POST_STATUS_ENUM
   }
 
-  enum POST_TYPE {
-    link,
-    image,
-    video
-  }
-
-  enum POST_STATUS {
-    active,
-    inactive,
-    pending
-  }
-`
+  ${enums}
+`;
 
 //Queries
 const queries = `
@@ -45,22 +46,22 @@ const queries = `
 
   """ Get a particular post """
   post (_id:ID!): Post
-`
+`;
 
 //Mutations
-const mutations =  `
+const mutations = `
   """ Add a new post """
-  addPost( title: String!, url: String! ,type: String!, space: ID!, premium: Boolean, priority:Int ): Post
+  addPost( title: String!, url: String! ,type: String!, space: ID, premium: Boolean, priority:Int ): Post
 
   """ Remove a post : PRIVATE """
   removePost( _id: String! ):Post
 
   """ Modify a post """ 
   modifyPost(_id:ID!,download:Int,premium:Boolean,priority:Int):Post
-`
+`;
 
 module.exports = {
   types,
   queries,
-  mutations
-}
+  mutations,
+};

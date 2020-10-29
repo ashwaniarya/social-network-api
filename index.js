@@ -1,44 +1,45 @@
-const { ApolloServer } = require('apollo-server-express')
-const express = require('express')
-const path = require('path');
-const mongoose = require('mongoose')
-const axios = require('axios')
-const dotenv = require('dotenv')
-dotenv.config()
-const {typeDefs,resolvers} = require('./src/resources')
+const { ApolloServer } = require("apollo-server-express");
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const axios = require("axios");
+const dotenv = require("dotenv");
+dotenv.config();
+const { typeDefs, resolvers } = require("./src");
 
-//test 
-console.log(process.env.MONGO_URL)
+//test
+console.log(process.env.MONGO_URL);
 // Connect ot mongodb
-mongoose.set('bufferCommands', false);
-mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true });
+mongoose.set("bufferCommands", false);
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+});
 
-const app = express()
+const app = express();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  formatError: err =>{ 
-    console.log(err)
-    return err
+  formatError: (err) => {
+    console.log(err);
+    return err;
   },
-  context: ({ req }) =>{ 
-    return ({
-      headers: req ? req.headers : ''
-    })
+  context: ({ req }) => {
+    return {
+      headers: req ? req.headers : "",
+    };
   },
-  introspection:true,
-  playground: true
-})
+  introspection: true,
+  playground: true,
+});
 
-server.applyMiddleware({ app, path:'/graph'})
+server.applyMiddleware({ app, path: "/graph" });
 
 // app.use(express.static(__dirname+'/build'));
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.resolve('build/index.html'));
 // });
-
 
 // server.listen().then(({ url }) => {
 //   console.log(`🚀  Server ready at ${url}`)

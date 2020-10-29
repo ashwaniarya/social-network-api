@@ -2,7 +2,7 @@ const { gql } = require('apollo-server')
 
 //types
 const types = gql`
-  type App {
+  type Home {
     _id:ID!,
     name: String,
     secret: String,

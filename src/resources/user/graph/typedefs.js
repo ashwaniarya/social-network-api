@@ -28,8 +28,7 @@ const types = gql`
   }
 
   type AuthUser { 
-    token: String,
-    user: User
+    token: String
   }
 `
 

@@ -9,6 +9,10 @@ let appSchema = new Schema({
   secret: { type: String, default: null },
   createdAt: {
     type: Date, default: Date.now()
+  },
+  config:{
+    type: Object,
+    default: {}
   }
 })
 

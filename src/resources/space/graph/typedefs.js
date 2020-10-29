@@ -1,5 +1,15 @@
 const { gql } = require('apollo-server')
+const { SPACE_STATUS_ENUM, SPACE_VISIBLITY_ENUM } = require('./../model/spaceConst')
+// Enums 
+const enums = `
+  enum SPACE_STATUS_ENUM {
+    ${ SPACE_STATUS_ENUM.join(",")}
+  }
 
+  enum SPACE_VISIBLITY_ENUM {
+    ${ SPACE_VISIBLITY_ENUM.join(",")}
+  }
+`
 //types
 const types = gql`
   type Space {
@@ -9,9 +19,13 @@ const types = gql`
     post:[Post],
     priority:Int,
     parent:Space,
+    status: SPACE_STATUS_ENUM,
+    visiblity: SPACE_VISIBLITY_ENUM,
     users:[ User ],
     postLimit:Int
    }
+
+   ${enums}
 `
 
 //Queries
@@ -26,11 +40,12 @@ const mutations = `
   """ Add a space : PROTECTED """
   addSpace( spaceName: String!, subSpaceName: String, priority: Int, parent: ID ): Space
 
-  """ Remove Space : PROTECTED"""
+  """ Remove Space : PROTECTED """
   removeSpace( spaceId: String!):Space
-
-  """ Modify Space """
+  
+  """ Modify Space : PROTECTED """
   modifySpace( _id:ID!, spaceName:String, subSpaceName:String, priority:Int, parent:ID ):Space
+
 `
 
 module.exports = {
