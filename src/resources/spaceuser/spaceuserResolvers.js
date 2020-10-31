@@ -4,7 +4,25 @@ const Permission = require("./../permissions/permissionModel");
 const User = require("./../user/model/index");
 const { validateToken, validateGatewayAccess } = require("../../authUtils");
 module.exports = resolver = {
-  Query: {},
+  Query: {
+    /**
+     * @description resolves to user joined spaces
+     */
+    getJoinedSpace: async (obj, args, context) => {
+      try {
+        await validateGatewayAccess(context);
+        let user = await validateToken(context);
+        // Get a list of joined spaces
+        let spaceuser = await SpaceUser.find({
+          user: user._id,
+        });
+
+        return spaceuser;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  },
   Mutation: {
     joinSpace: async (parent, args, context) => {
       try {
