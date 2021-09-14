@@ -1,41 +1,40 @@
-const { gql } = require('apollo-server')
+const { gql } = require("apollo-server");
 
 //types
 const types = gql`
   type User {
-    _id:ID,
-    username: String,
-    email: String,
-    password: String,
-    type: TYPE,
-    spaces: [ UserSpace ]
+    _id: ID
+    username: String
+    password: String
+    type: TYPE
+    spaces: [UserSpace]
   }
 
   type UserSpace {
-    space: Space,
+    space: Space
     rol: ROL
   }
 
   enum ROL {
-    admin,
+    admin
     moderator
   }
 
   enum TYPE {
-    god,
-    normal,
+    god
+    normal
     manager
   }
 
-  type AuthUser { 
+  type AuthUser {
     token: String
   }
-`
+`;
 
 //Queries
 const queries = `
   
-`
+`;
 
 //Mutations
 const mutations = `
@@ -45,10 +44,10 @@ const mutations = `
   login ( username: String!, password: String!): AuthUser
   """ To check if username already exists : PUBLIC """
   checkUsernameEmail ( username: String, email: String ): Boolean  
-`
+`;
 
 module.exports = {
   types,
   queries,
-  mutations
-}
+  mutations,
+};
