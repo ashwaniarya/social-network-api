@@ -19,13 +19,13 @@ const types = gql`
     views: Int
     space: Space
     user: User
-    likes: Int
     type: POST_TYPE_ENUM
     url: String
     download: Int
     set: Int
     share: Int
     priority: Int
+    score: Int
     premium: Boolean
     status: POST_STATUS_ENUM
   }
