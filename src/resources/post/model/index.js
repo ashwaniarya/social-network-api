@@ -6,7 +6,6 @@ let postSchema = new Schema(
     parent: { type: Schema.Types.ObjectId, ref: "Post" },
     title: { type: String, required: true },
     views: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 },
     url: { type: String, default: 0 },
     download: { type: Number, default: 0 },
     keywords: [
@@ -35,6 +34,10 @@ let postSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    score: {
+      type: Number,
+      default: 0,
     },
     set: { type: Number, default: 0 },
     share: { type: Number, default: 0 },
