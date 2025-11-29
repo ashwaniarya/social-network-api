@@ -36,4 +36,3 @@ Below are the follwing options availale to users belongs to a space :
 |           | can edit space's descriptions             |
 |           | can delete the space                      |
 
-# WORK IN PROGRESS
